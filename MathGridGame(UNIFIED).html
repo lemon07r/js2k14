@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Math Grid Game v6.18.14</title>
+        <style>
+
+        body
+        {A
+            font-family: "Arial";
+            font-size: 30px;
+            border:double 8px #ffffff;
+            -moz-border-radius: 14px;
+            -webkit-border-radius: 14px;
+            border-radius: 14px;
+            background:-webkit-gradient(linear, 81% 100%, 30% 5%, from(#00C7FF), to(#FF8828))
+        }
+        button
+        {
+            background-color:#ffffff;
+            border:3px solid;
+            border-color: #34B8CA;
+        }
+        </style>
+    </head>
+    <body id="bodyId">
+            <script type="text/javascript">
+            document.write("Math Grid Game")
+            </script>
+            <p> <input type="text" id="selectedNumbers" /></p>
+            <script type="text/javascript">
+            var inputNumbers = document.getElementById("selectedNumbers");
+            inputNumbers.disabled = true;
+            var button = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            var numbers = new Array();
+            for (var i=0; i<16; i++)
+            {
+                var randomNumber = Math.floor(Math.random()*9);
+                numbers[i] = document.createElement("button");
+                numbers[i].innerHTML = button[randomNumber];
+                numbers[i].setAttribute("type", "button");
+                numbers[i].setAttribute("id", button[i]);
+                numbers[i].setAttribute("onclick", "onClick('" + button[randomNumber] + "')");
+                numbers[i].setAttribute("value", button[randomNumber]);
+                document.getElementById("bodyId").appendChild(numbers[i]);
+                if (i == 3 || i == 7 || i == 11)
+                {
+                    document.write("<br>");
+                }
+            }
+            var numOne = (Math.ceil(Math.random()*15)).toString();
+            var numTwo = (Math.ceil(Math.random()*15)).toString();
+            do
+            {
+                numTwo = Math.ceil(Math.random()*15).toString();
+            }
+            while (numTwo == numOne);
+            var numberOne = document.getElementById(numOne).value;
+            var numberTwo = document.getElementById(numTwo).value;
+            var answer = parseInt(numberOne) + parseInt(numberTwo);
+            var total = 0
+            inputNumbers.value = " = " + answer;
+            function onClick(x)
+            {
+                if (inputNumbers.value == " = " + answer)
+                {
+                    inputNumbers.value = x;
+                }
+                else
+                {
+                    inputNumbers.value += " + " + x;
+                }
+                x = parseInt(x);
+                total += x;
+                if (total > answer)
+                {
+                    alert("Sorry, but " + inputNumbers.value + " does not equal " +
+                        answer + "! Try again or start a new game if it's too challenging!.");
+                    inputNumbers.value = " = " + answer;
+                    total = 0
+                }
+                else if(total == answer)
+                {
+                    inputNumbers.value += " = " + answer;
+                    alert("Congratulations, " + inputNumbers.value + " is correct! Try another one!");
+                    location.reload();
+                }
+            }
+            document.write("<br> You need to pick numbers that add up to " + answer + "!<br>");
+            var clear;
+            clear = document.createElement("button");
+            clear.setAttribute("type", "button");
+            clear.setAttribute("onclick", "onclickClear()");
+            clear.innerHTML = "Clear";
+            document.getElementById("bodyId").appendChild(clear);
+            function onclickClear()
+            {
+                inputNumbers.value = " = " + answer;
+                total = 0;
+            }
+            var restart;
+            restart = document.createElement("button");
+            restart.setAttribute("type", "button");
+            restart.setAttribute("onclick", "onclickRestart()");
+            restart.innerHTML = "New Game";
+            document.getElementById("bodyId").appendChild(restart);
+            function onclickRestart()
+            {
+                alert("New Game Started!");
+                location.reload();
+            }
+        </script>
+    </body>
+</html>

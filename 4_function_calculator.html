@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!-- Lamim Rashid April 1, 2014 9:20 am
+ALPHA revision log
+v0401
+-Rolled back alot of the script due to errors (rolled back to march 17 version)
+-using old script, script will be completely revamped, this is till work in progress and not yet in a function stage
+-got more previously not working functions working
+-some new functions added, not all of these functions are functional yet
+-removed recursion, will add again after other functions are fixed
+-will begin work on F (Fibonacci) button soon
+-will fix button layout soon
+-will add css soon
+-will shrink down the number of functions and merge a few soon
+-working on converting the trig functions from radians to degrees
+-fixed a few syntax errors
+-made more readable
+
+Self assessment: 65% -I think this is currently a 70% as it is only 70% done but has a lot of functionality 
+already. but since some of these functions are not completely finished I gave my self a 65%, I also have some cleaning up to do
+and have to merge a few of my functions 
+ -->
+<html>
+	<head>
+		<meta charset="UTF-16">
+		<title>Calculator</title>
+		<style>
+		background:-webkit-gradient(radial, 167 -370, 298, 220 -257, 465, from(#00ABFF), to(#FF7935))
+
+		</style>
+	</head>
+	<body>
+		<p> <input type="text" id="number" /></p>
+		<p>
+		<button type="button" onclick="onclickNumber('7')">7</button>
+		<button type="button" onclick="onclickNumber('8')">8</button>
+		<button type="button" onclick="onclickNumber('9')">9</button>
+		<button type="button" onclick="onclickOperation('+')">+</button>
+		<button type="button" onclick="onclickOperation('-')">-</button>
+		<button type="button" onclick="onclickOperation('*')">*</button>
+		<button type="button" onclick="onclickOperation('/')">/</button>		
+		<br/>
+		<button type="button" onclick="onclickNumber('4')">4</button>
+		<button type="button" onclick="onclickNumber('5')">5</button>
+		<button type="button" onclick="onclickNumber('6')">6</button>
+		<button type="button" onclick="onclickPolarity('+/-')">+/-</button>	
+		<button type="button" onclick="onclickDecimal('.')">.</button>		
+		<br/>
+		<button type="button" onclick="onclickSin('Sin')">Sin</button>
+		<button type="button" onclick="onclickTan('Tan')">Tan</button>
+		<button type="button" onclick="onclickCos('Cos')">Cos</button>
+		<button type="button" onclick="onclickSq('Sq')">x^2</button>
+		<button type="button" onclick="onclickLog('log')">log</button>
+		<button type="button" onclick="onclickRnd('Round')">Round</button>
+		<button type="button" onclick="onclickRndUp('Round +')">Round +</button>
+		<button type="button" onclick="onclickRndDown('Round -')">Round -</button>		
+		<button type="button" onclick="onclickRandom('Random')">Random</button>	
+		<br/>
+		<button type="button" onclick="onclickNumber('1')">1</button>
+		<button type="button" onclick="onclickNumber('2')">2</button>
+		<button type="button" onclick="onclickNumber('3')">3</button>
+		<button type="button" onclick="onclickPi()" id="pi">Pi</button>	
+		<button type="button" onclick="onclickSqRt()" id="SqRt">√x</button>
+		<br/>
+		<button type="button" onclick="onclickNumber('0')">0</button>
+		<button type="button" onclick="onclickEqual('=')">=</button>
+		<button type="button" onclick="onclickClearAll( )">C</button>
+		<button type="button" onclick="onclickClearEntry( )">CE</button>
+		<button type="button" onclick="onclickBack('Bk')">Bk</button>				
+		</p> 
+		<p id="result"></p> 		
+		<script type="text/javascript">
+		/* OLD SCRIPT, NEW SCRIPT IN DEVELOPMENT */
+			var output = document.getElementById("result"); 
+			var input = document.getElementById("number"); 
+			var num;
+			var operation;
+			var pi = Math.PI;
+			var back;
+			input.disabled = true;
+			
+			/*img[i].setAttribute("id", myImages[randomImage]+i);
+					img[i].setAttribute("ondrag", "onDrag(this)");
+					img[i].setAttribute("ondragend", "onDragEnd(this)");
+					img[i].setAttribute("onclick", "onClick(this)");
+					document.body.appendChild(img[i]); */
+
+
+			function onclickNumber(x) 
+			{
+				input.value += x; 
+				number = parseFloat(input.value);
+			}
+			
+			function onclickDecimal(y)
+			{
+				input.value += y;
+				number = parseFloat(input.value);
+			}
+			
+			function onclickClearEntry() 
+			{
+				input.value = " ";
+			} 
+			
+			function onclickClearAll()
+			{
+				input.value = "0";
+				number = parseFloat(input.value);
+				operation = parseFloat(input.value);
+			}
+			
+			function onclickPi()
+			{
+				onclickClearEntry();
+				onclickNumber(pi.toString());
+			}
+			
+			/*function convertRadiansToDegress()
+			{
+			* (180 / Math.PI)
+			}*/
+			
+			
+			//random button still in development!
+			function onclickRandom()
+			{
+				onclickClearEntry();
+				onclickNumber(random.toString());
+			}
+			
+			function onclickSqRt()
+			{
+				input.value = Math.sqrt(number);
+				number = parseFloat(input.value);
+			}
+			
+			function onclickSq()
+			{
+				input.value = number * number;
+				number = parseFloat(input.value);
+			}
+			
+			function onclickRndDwn()
+			{
+				input.value = Math.floor(number);
+				number = parseFloat(input.value);
+			}
+			
+			function onclickRndUp()
+			{
+				input.value = Math.ceil(number);
+				number = parseFloat(input.value);
+			}
+			
+			function onclickRnd()
+			{
+				input.value = Math.round(number);
+				number = parseFloat(input.value);
+			}
+			
+			function onclickSin()
+			{
+				input.value = Math.sin(number) ;
+				number = parseFloat(input.value) ;
+			}
+			
+			function onclickCos()
+			{
+				input.value = Math.cos(number);
+				number = parseFloat(input.value);
+			}
+			
+			function onclickTan()
+			{
+				input.value = Math.tan(number);
+				number = parseFloat(input.value);
+			}
+			
+			//log button still in development!
+			function onclickLog()
+			{
+				input.value = Math.round(number);
+				number = parseFloat(input.value);
+			}
+			
+			function onclickPolarity() 
+			{
+				input.value = 0 - input.value;
+			} 
+			
+			function onclickOperation(x)
+			{
+				num = input.value;
+				input.value = " ";
+				operation = x;
+			}
+			
+			function onclickBack()
+			{
+				back = input.value;
+				input.value = back.slice(0,-1);
+			} 
+			//
+			function onclickEqual()
+			{
+				if (operation == '+')
+				{
+					input.value = (parseFloat(num) + parseFloat(input.value));
+				}
+				else if (operation == '-')
+				{
+					input.value = (parseFloat(num) - parseFloat(input.value));
+				}
+				else if (operation == '/')
+				{
+					input.value = (parseFloat(num) / parseFloat(input.value));
+				}
+				else if (operation == '*')
+				{
+					input.value = (parseFloat(num) * parseFloat(input.value));
+				}
+			} 
+		</script>
+	</body>
+</html>
